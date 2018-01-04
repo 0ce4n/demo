@@ -1,6 +1,5 @@
 import scrapy
 from scrapyspider.items import DemoItem
-import scrapy
 
 class BlogSpider(scrapy.Spider):
 	name = 'woodenrobot'
