@@ -13,8 +13,8 @@ class TestSpider(scrapy.Spider):
     #start_urls = ['https://www.qiushibaike.com/']
 	def _get_gender(self, item):
 		if item == 'manIcon':
-			return u'男'
-		return u'女'
+			return u'man'
+		return u'woman'
 
 	def parse(self, response):
 		Item = TestItem()
