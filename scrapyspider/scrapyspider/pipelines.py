@@ -5,6 +5,8 @@
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 import json
+import scrapy
+from scrapy.pipelines.images import ImagesPipeline
 from scrapy.exceptions import DropItem
 
 class ScrapyspiderPipeline(object):
@@ -18,10 +20,10 @@ class TestPipeline(object):
 
     def process_item(self, item, spider):
         if item['user_gender'] == 'man':
-            line = json.dumps(dict(item)) + '\n'
+            line = json.dumps(dict(item),ensure_ascii=False) + '\n'
             self.man_fp.write(line)
         if item['user_gender'] == 'woman':
-            line = json.dumps(dict(item)) + '\n'
+            line = json.dumps(dict(item),ensure_ascii=False) + '\n'
             self.woman_fp.write(line)
         return item
         
@@ -35,8 +37,12 @@ class TestPipeline(object):
         self.man_fp.close
         self.woman_fp.close
 
-class Test2Pipeline(object):
-    def process_item(self, item, spider):
-        if item['user_gender'] == 'man':
-            raise DropItem("Drop this item")
+class ImgPipeline(ImagesPipeline):
+    def get_media_requests(self,item,info):
+        img_url = 'http:' + str(item['user_img_url'])
+        print img_url
+        yield scrapy.Request(img_url)
+
+    def item_completed(self,results,item,info):
+
         return item

@@ -65,10 +65,11 @@ ROBOTSTXT_OBEY = False
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    'scrapyspider.pipelines.ScrapyspiderPipeline': 300,
     'scrapyspider.pipelines.TestPipeline':500,
-    'scrapyspider.pipelines.Test2Pipeline':200,
+    'scrapyspider.pipelines.ImgPipeline':100,
 }
+
+IMAGES_STORE = './dhy'
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html

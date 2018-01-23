@@ -23,3 +23,9 @@ class TestItem(scrapy.Item):
 	user_gender = scrapy.Field()
 	user_age = scrapy.Field()
 	user_content = scrapy.Field()
+	user_img_url = scrapy.Field()
+
+class ImageItem(scrapy.Item):
+	img_name = scrapy.Field()
+	image_urls = scrapy.Field()
+	images = scrapy.Field()
